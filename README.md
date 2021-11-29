@@ -87,6 +87,9 @@ DELETE /api/cluster/:uuid/server/:serverUuid
 | `type`           | Type. `Base` or `Point of Interest`                                                   |
 | `ownerName`      | Base Owner Name (Nullable)                                                            |
 | `allianceStatus` | Alliance Status (Nullable). Enum: `Allied`, `Friendly`, `Neutral`, `Hostile`, `Enemy` |
+| `lat`            | Latitude `DECIMAL(3,1)`                                                               |
+| `lng`            | Longitude `DECIMAL(3,1)`                                                              |
+| `description`    | Description (Nullable)                                                                |
 | `createdAt`      | Created At Date/Time                                                                  |
 | `updatedAt`      | Updated At Date/Time                                                                  |
 
