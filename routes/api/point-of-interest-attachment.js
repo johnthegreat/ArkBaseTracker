@@ -62,7 +62,7 @@ router.put('/api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInte
 
 router.delete('/api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInterestUuid/attachment/:pointOfInterestAttachmentUuid',
 	doesClusterExist, doesServerBelongToCluster, doesPointOfInterestBelongToServer, async function(req, res) {
-	const pointOfInterestAttachment = PointOfInterestAttachment.findByPk(req.params['pointOfInterestAttachmentUuid']);
+	const pointOfInterestAttachment = await PointOfInterestAttachment.findByPk(req.params['pointOfInterestAttachmentUuid']);
 	await pointOfInterestAttachment.destroy();
 	res.status(204).send();
 });
