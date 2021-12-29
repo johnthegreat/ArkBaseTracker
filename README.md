@@ -11,7 +11,7 @@ This project is a backend application to help keep track of points of interest a
 #### Fields
 
 | Field       | Description                        |
-| ----------- | ---------------------------------- |
+|-------------|------------------------------------|
 | `uuid`      | UUID (Auto Generated)              |
 | `name`      | Cluster Name. `VARCHAR(100)`       |
 | `type`      | Cluster Type. Enum: `PVE` or `PVP` |
@@ -44,14 +44,14 @@ DELETE /api/cluster/:uuid
 
 #### Fields
 
-| Field         | Description               |
-| ------------- | ------------------------- |
-| `uuid`        | UUID (Auto Generated)     |
-| `clusterUuid` | Cluster UUID              | 
-| `mapType`     | Map Name. `VARCHAR(255)`  |
-| `mapNumber`   | Map Number                |
-| `createdAt`   | Created At Date/Time      |
-| `updatedAt`   | Updated At Date/Time      |
+| Field         | Description                 |
+|---------------|-----------------------------|
+| `uuid`        | UUID (Auto Generated)       |
+| `clusterUuid` | Cluster UUID                |
+| `serverName`  | Server Name. `VARCHAR(255)` |
+| `mapType`     | Map Name. `VARCHAR(255)`    |
+| `createdAt`   | Created At Date/Time        |
+| `updatedAt`   | Updated At Date/Time        |
 
 #### Routes
 
@@ -69,8 +69,8 @@ DELETE /api/cluster/:uuid/server/:serverUuid
 {
     "uuid": "9092bc77-5e77-42ce-94c5-af3b27e528b2",
     "clusterUuid": "198dea18-5941-41d3-a330-e156ea108a2d",
+    "serverName": "NA-PVE-Official-CrystalIsles834",
     "mapType": "Crystal Isles",
-    "mapNumber": 834,
     "createdAt": "2021-10-06T19:02:26.434Z",
     "updatedAt": "2021-10-06T19:02:26.434Z"
 }
@@ -81,7 +81,7 @@ DELETE /api/cluster/:uuid/server/:serverUuid
 #### Fields
 
 | Field            | Description                                                                           |
-| ---------------- | ------------------------------------------------------------------------------------- |
+|------------------|---------------------------------------------------------------------------------------|
 | `uuid`           | UUID (Auto Generated)                                                                 |
 | `serverUuid`     | Server UUID                                                                           | 
 | `type`           | Type. `Base` or `Point of Interest`                                                   |
@@ -126,7 +126,7 @@ DELETE /api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInterestU
 #### Fields
 
 | Field                 | Description                                                     |
-| --------------------- | --------------------------------------------------------------- |
+|-----------------------|-----------------------------------------------------------------|
 | `uuid`                | UUID (Auto Generated)                                           |
 | `pointOfInterestUuid` | Point of Interest UUID                                          |
 | `originalFileName`    | Original Uploaded File Name (Internal Use Only). `VARCHAR(255)` |
@@ -170,9 +170,9 @@ Make a `multipart/form-data` request to:
 
 Expected Post Body:
 
-| Field   | Description                                    |
-| ------- | ---------------------------------------------- |
-| `file`  | Image File to Upload (from `input[type=file]`) |
+| Field  | Description                                    |
+|--------|------------------------------------------------|
+| `file` | Image File to Upload (from `input[type=file]`) |
 
 #### Download Instructions
 

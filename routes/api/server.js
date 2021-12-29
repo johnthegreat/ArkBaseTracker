@@ -14,8 +14,7 @@ router.get('/api/cluster/:uuid/server', doesClusterExist, async function(req, re
 				clusterUuid: clusterId
 			},
 			order: [
-				['mapType', 'ASC'],
-				['mapNumber', 'ASC']
+				['serverName', 'ASC']
 			]
 		});
 		res.json(servers);

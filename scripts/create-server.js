@@ -4,15 +4,15 @@ const Server = require('../models/Server');
 const args = process.argv.slice(2);
 
 if (args.length < 3) {
-	console.log('Usage: node create-poi.js <clusterUuid> <mapType> <mapNumber>');
+	console.log('Usage: node create-server.js <clusterUuid> <serverName> <mapType>');
 	process.exit(1);
 }
 
 (async function() {
 	const server = Server.build({
 		clusterUuid: args[0],
-		mapType: args[1],
-		mapNumber: args[2]
+		serverName: args[1],
+		mapType: args[2]
 	});
 	try {
 		await server.save();

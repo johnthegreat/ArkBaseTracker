@@ -17,18 +17,19 @@ const Server = sequelize.define('Server', {
 			key: 'uuid'
 		}
 	},
-	mapType: {
+	serverName: {
 		type: DataTypes.STRING,
 		allowNull: false
 	},
-	mapNumber: {
-		type: DataTypes.INTEGER
+	mapType: {
+		type: DataTypes.STRING,
+		allowNull: false
 	}
 }, {
 	indexes: [
 		{
 			unique: true,
-			fields: ['clusterUuid', 'mapType', 'mapNumber']
+			fields: ['clusterUuid', 'serverName']
 		},
 		{
 			fields: ['mapType']
