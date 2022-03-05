@@ -40,8 +40,32 @@ router.post('/api/cluster/:uuid/server/:serverUuid/point-of-interest', doesClust
 });
 
 router.put('/api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInterestUuid', doesClusterExist, doesServerBelongToCluster, doesPointOfInterestBelongToServer, async function(req, res) {
-	const pointOfInterest = PointOfInterest.build(req.body);
-	pointOfInterest.serverUuid = req.params['serverUuid'];
+	const pointOfInterest = await PointOfInterest.findByPk(req.params['pointOfInterestUuid']);
+	if (!pointOfInterest) {
+		return res.status(404).send();
+	}
+
+	if (req.body.type !== null) {
+		pointOfInterest.type = req.body.type;
+	}
+	if (req.body.ownerName !== null) {
+		pointOfInterest.ownerName = req.body.ownerName;
+	}
+	if (req.body.allianceStatus !== null) {
+		pointOfInterest.allianceStatus = req.body.allianceStatus;
+	}
+	if (req.body.lat !== null) {
+		pointOfInterest.lat = req.body.lat;
+	}
+	if (req.body.lng !== null) {
+		pointOfInterest.lng = req.body.lng;
+	}
+	if (req.body.wiped !== null) {
+		pointOfInterest.wiped = req.body.wiped;
+	}
+	if (req.body.description !== null) {
+		pointOfInterest.description = req.body.description;
+	}
 	await pointOfInterest.save();
 	res.json(pointOfInterest);
 });
