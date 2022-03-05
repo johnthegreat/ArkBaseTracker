@@ -27,7 +27,7 @@ const PointOfInterest = sequelize.define('PointOfInterest', {
 	},
 	allianceStatus: {
 		type: DataTypes.ENUM,
-		values: ['Allied', 'Friendly', 'Neutral', 'Hostile', 'Enemy'],
+		values: ['Owned', 'Allied', 'Friendly', 'Neutral', 'Hostile', 'Enemy'],
 		defaultValue: 'Neutral'
 	},
 	wiped: {
