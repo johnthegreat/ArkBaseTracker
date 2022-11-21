@@ -1,5 +1,12 @@
 const sharp = require('sharp');
 
+/**
+ *
+ * @param {Buffer} imageData
+ * @param {number} width
+ * @param {number} height
+ * @returns {Promise<Buffer>}
+ */
 function resizeImage(imageData, width, height) {
 	return sharp(imageData)
 		.resize({ width: width, height: height })

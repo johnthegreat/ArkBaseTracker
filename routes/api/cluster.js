@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const express = require('express');
 const router = express.Router();
 
@@ -5,6 +6,14 @@ const doesClusterExist = require('../middleware/doesClusterExist');
 
 const Cluster = require('../../models/Cluster');
 
+const allowedIncomingClusterFieldNames = ['name', 'type'];
+
+/*
+ * GET /api/cluster
+ * Status Codes:
+ * - 200
+ * - 500
+ */
 router.get('/api/cluster', async function(req, res, next) {
 	try {
 		const clusters = await Cluster.findAll({
@@ -19,6 +28,15 @@ router.get('/api/cluster', async function(req, res, next) {
 	}
 });
 
+/*
+ * GET /api/cluster/:uuid
+ * Params:
+ * - uuid (string)
+ * Status Codes:
+ * - 200
+ * - 404
+ * - 500
+ */
 router.get('/api/cluster/:uuid', doesClusterExist, async function(req,res) {
 	const clusterId = req.params['uuid'];
 
@@ -31,9 +49,18 @@ router.get('/api/cluster/:uuid', doesClusterExist, async function(req,res) {
 	}
 });
 
+/*
+ * POST /api/cluster
+ * Body:
+ * - name (string)
+ * - type (string)
+ * Status Codes:
+ * - 201
+ * - 500
+ */
 router.post('/api/cluster', async function(req, res) {
 	try {
-		const cluster = Cluster.build(req.body);
+		const cluster = Cluster.build(_.pick(req.body, allowedIncomingClusterFieldNames));
 		await cluster.save();
 		res.status(201).json(cluster);
 	} catch (err) {
@@ -42,6 +69,15 @@ router.post('/api/cluster', async function(req, res) {
 	}
 });
 
+/*
+ * DELETE /api/cluster/:uuid
+ * Params:
+ * - uuid (string)
+ * Status Codes:
+ * - 204
+ * - 404
+ * - 500
+ */
 router.delete('/api/cluster/:uuid', doesClusterExist, async function(req, res) {
 	const clusterId = req.params['uuid'];
 

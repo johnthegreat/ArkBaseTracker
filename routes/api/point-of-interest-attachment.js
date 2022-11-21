@@ -14,6 +14,16 @@ const upload = createMulterInstance(['image/png', 'image/jpg', 'image/jpeg']);
 const TinifyImageService = require('../../lib/TinifyImageService');
 const tinifyImageService = new TinifyImageService();
 
+/*
+ * GET /api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInterestUuid/attachment
+ * Params:
+ * - uuid (string)
+ * - serverUuid (string)
+ * - pointOfInterestUuid (string)
+ * Status Codes:
+ * - 200
+ * - 404
+ */
 router.get('/api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInterestUuid/attachment',
 	doesClusterExist, doesServerBelongToCluster, doesPointOfInterestBelongToServer, async function(req, res, next) {
 	const pointOfInterestUuid = req.params['pointOfInterestUuid'];
@@ -26,6 +36,17 @@ router.get('/api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInte
 	res.json(pointOfInterestAttachments);
 });
 
+/*
+ * GET /api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInterestUuid/attachment/:pointOfInterestAttachmentUuid
+ * Params:
+ * - uuid (string)
+ * - serverUuid (string)
+ * - pointOfInterestUuid (string)
+ * - pointOfInterestAttachmentUuid (string)
+ * Status Codes:
+ * - 200
+ * - 404
+ */
 router.get('/api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInterestUuid/attachment/:pointOfInterestAttachmentUuid',
 	doesClusterExist, doesServerBelongToCluster, doesPointOfInterestBelongToServer, async function(req, res) {
 	const pointOfInterestAttachmentUuid = req.params['pointOfInterestAttachmentUuid'];
@@ -37,6 +58,19 @@ router.get('/api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInte
 	res.json(pointOfInterestAttachment);
 });
 
+/*
+ * POST /api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInterestUuid/attachment
+ * Params:
+ * - uuid (string)
+ * - serverUuid (string)
+ * - pointOfInterestUuid (string)
+ * Body:
+ * - file (multipart/form-data)
+ * Status Codes:
+ * - 201
+ * - 400
+ * - 404
+ */
 router.post('/api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInterestUuid/attachment',
 	doesClusterExist, doesServerBelongToCluster, doesPointOfInterestBelongToServer, upload.single('file'), async function (req, res) {
 	if (!req.file) {
@@ -54,12 +88,34 @@ router.post('/api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInt
 	res.status(201).json(pointOfInterestAttachment);
 });
 
+/*
+ * PUT /api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInterestUuid/attachment/:pointOfInterestAttachmentUuid
+ * Params:
+ * - uuid (string)
+ * - serverUuid (string)
+ * - pointOfInterestUuid (string)
+ * - pointOfInterestAttachmentUuid (string)
+ * Status Codes:
+ * - 404
+ * - 405
+ */
 router.put('/api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInterestUuid/attachment/:pointOfInterestAttachmentUuid',
 	doesClusterExist, doesServerBelongToCluster, doesPointOfInterestBelongToServer, async function(req, res) {
 	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 	res.status(405).send(); // 'Method Not Allowed'
 });
 
+/*
+ * DELETE /api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInterestUuid/attachment/:pointOfInterestAttachmentUuid
+ * Params:
+ * - uuid (string)
+ * - serverUuid (string)
+ * - pointOfInterestUuid (string)
+ * - pointOfInterestAttachmentUuid (string)
+ * Status Codes:
+ * - 204
+ * - 404
+ */
 router.delete('/api/cluster/:uuid/server/:serverUuid/point-of-interest/:pointOfInterestUuid/attachment/:pointOfInterestAttachmentUuid',
 	doesClusterExist, doesServerBelongToCluster, doesPointOfInterestBelongToServer, async function(req, res) {
 	const pointOfInterestAttachment = await PointOfInterestAttachment.findByPk(req.params['pointOfInterestAttachmentUuid']);
