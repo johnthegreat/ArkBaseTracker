@@ -192,4 +192,6 @@ Example:
 
 Copyright © 2021 John Nahlen
 
-See `LICENSE.md`.
+`GPL-3.0-or-later`
+
+See `LICENSE.txt`.

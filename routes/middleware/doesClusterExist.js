@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 const Cluster = require('../../models/Cluster');
 
 const doesClusterExist = async function(req, res, next) {

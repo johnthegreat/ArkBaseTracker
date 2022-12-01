@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 require('dotenv').config();
 const PointOfInterest = require('../models/PointOfInterest');
 

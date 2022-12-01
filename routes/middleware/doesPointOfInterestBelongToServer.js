@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 const PointOfInterest = require('../../models/PointOfInterest');
 
 async function doesPointOfInterestBelongToServer(req, res, next) {

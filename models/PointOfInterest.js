@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 const sequelize = require('../lib/DatabaseProvider');
 const DataTypes = require('sequelize').DataTypes;
 

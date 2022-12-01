@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 const _ = require('lodash');
 const express = require('express');
 const router = express.Router();

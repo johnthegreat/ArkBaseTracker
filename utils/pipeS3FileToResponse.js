@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 const RedisCacheProvider = require('../lib/RedisCacheProvider');
 const getS3Client = require('../utils/getS3Client');
 

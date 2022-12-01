@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 const tinify = require('tinify');
 tinify.key = process.env.TINIFY_API_KEY;
 

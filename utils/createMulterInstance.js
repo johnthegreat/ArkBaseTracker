@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 const crypto = require('crypto');
 const multer = require('multer');
 const debug = require('debug')('arkbasetracker:server');

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 const Server = require('../../models/Server');
 
 async function doesServerBelongToCluster(req, res, next) {
