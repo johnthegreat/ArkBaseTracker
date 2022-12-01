@@ -120,8 +120,8 @@ router.put('/api/cluster/:uuid/server/:serverUuid', doesClusterExist, doesServer
 /*
  * DELETE /api/cluster/:uuid/server/:serverUuid
  * Params:
- * - uuid: string
- * - serverUuid: string
+ * - uuid (string)
+ * - serverUuid (string)
  * Status Codes:
  * - 204
  * - 404

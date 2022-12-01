@@ -84,13 +84,13 @@ router.post('/api/cluster/:uuid/server/:serverUuid/point-of-interest', doesClust
  * - serverUuid (string)
  * - pointOfInterestUuid (string)
  * Body:
- * - type: string
- * - ownerName: string
- * - allianceStatus: string
- * - lat: number
- * - lng: number
- * - wiped: boolean
- * - description: string
+ * - type (string)
+ * - ownerName (string)
+ * - allianceStatus (string)
+ * - lat (number)
+ * - lng (number)
+ * - wiped (boolean)
+ * - description (string)
  * Status Codes:
  * - 200
  * - 404

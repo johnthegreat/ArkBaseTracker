@@ -1,0 +1,461 @@
+openapi: 3.0.3
+info:
+  title: Ark Base Tracker
+  description: Ark Base Tracker
+  version: 1.0.0
+tags:
+  - name: Cluster
+  - name: Server
+  - name: Point of Interest
+  - name: Point of Interest Attachment
+paths:
+  /api/cluster:
+    get:
+      tags:
+        - Cluster
+      summary: Get a list of all Clusters.
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cluster'
+    post:
+      tags:
+        - Cluster
+      summary: Create a new Cluster.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - type
+              properties:
+                name:
+                  type: string
+                  maxLength: 100
+                type:
+                  type: string
+                  enum:
+                    - PVE
+                    - PVP
+      responses:
+        '201':
+          description: 'Created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+  /api/cluster/{uuid}:
+    get:
+      tags:
+        - Cluster
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      summary: Get a single Cluster.
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+        '404':
+          description: 'Not Found'
+    delete:
+      tags:
+        - Cluster
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      summary: Delete a single Cluster.
+      responses:
+        '204':
+          description: 'No Content'
+        '404':
+          description: 'Not Found'
+  /api/cluster/{uuid}/server:
+    get:
+      tags:
+        - Server
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Server'
+        '404':
+          description: 'Not Found'
+    post:
+      tags:
+        - Server
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                serverName:
+                  type: string
+                mapType:
+                  type: string
+      responses:
+        '201':
+          description: 'Created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Server'
+        '404':
+          description: 'Not Found'
+  /api/cluster/{uuid}/server/{serverUuid}:
+    get:
+      tags:
+        - Server
+      parameters:
+        - $ref: '#/components/parameters/ClusterUuid'
+        - $ref: '#/components/parameters/ServerUuid'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Server'
+        '404':
+          description: 'Not Found'
+    put:
+      tags:
+        - Server
+      parameters:
+        - $ref: '#/components/parameters/ClusterUuid'
+        - $ref: '#/components/parameters/ServerUuid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                serverName:
+                  type: string
+                mapType:
+                  type: string
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Server'
+        '404':
+          description: 'Not Found'
+    delete:
+      tags:
+        - Server
+      parameters:
+        - $ref: '#/components/parameters/ClusterUuid'
+        - $ref: '#/components/parameters/ServerUuid'
+      responses:
+        '204':
+          description: 'No Content'
+        '404':
+          description: 'Not Found'
+  /api/cluster/{uuid}/server/{serverUuid}/point-of-interest:
+    get:
+      tags:
+        - Point of Interest
+      parameters:
+        - $ref: '#/components/parameters/ClusterUuid'
+        - $ref: '#/components/parameters/ServerUuid'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointOfInterest'
+        '404':
+          description: 'Not Found'
+    post:
+      tags:
+        - Point of Interest
+      parameters:
+        - $ref: '#/components/parameters/ClusterUuid'
+        - $ref: '#/components/parameters/ServerUuid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                ownerName:
+                  type: string
+                allianceStatus:
+                  type: string
+                wiped:
+                  type: boolean
+                lat:
+                  type: number
+                lng:
+                  type: number
+                description:
+                  type: string
+      responses:
+        '201':
+          description: 'Created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointOfInterest'
+        '404':
+          description: 'Not Found'
+  /api/cluster/{uuid}/server/{serverUuid}/point-of-interest/{pointOfInterestUuid}:
+    get:
+      tags:
+        - Point of Interest
+      parameters:
+        - $ref: '#/components/parameters/ClusterUuid'
+        - $ref: '#/components/parameters/ServerUuid'
+        - $ref: '#/components/parameters/PointOfInterestUuid'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointOfInterest'
+        '404':
+          description: 'Not Found'
+    put:
+      tags:
+        - Point of Interest
+      parameters:
+        - $ref: '#/components/parameters/ClusterUuid'
+        - $ref: '#/components/parameters/ServerUuid'
+        - $ref: '#/components/parameters/PointOfInterestUuid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                ownerName:
+                  type: string
+                allianceStatus:
+                  type: string
+                wiped:
+                  type: boolean
+                lat:
+                  type: number
+                lng:
+                  type: number
+                description:
+                  type: string
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointOfInterest'
+        '404':
+          description: 'Not Found'
+  /api/cluster/{uuid}/server/{serverUuid}/point-of-interest/{pointOfInterestUuid}/attachment:
+    get:
+      tags:
+        - Point of Interest Attachment
+      parameters:
+        - $ref: '#/components/parameters/ClusterUuid'
+        - $ref: '#/components/parameters/ServerUuid'
+        - $ref: '#/components/parameters/PointOfInterestUuid'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointOfInterestAttachment'
+        '404':
+          description: 'Not Found'
+  /api/cluster/{uuid}/server/{serverUuid}/point-of-interest/{pointOfInterestUuid}/attachment/{pointOfInterestAttachmentUuid}:
+    get:
+      tags:
+        - Point of Interest Attachment
+      parameters:
+        - $ref: '#/components/parameters/ClusterUuid'
+        - $ref: '#/components/parameters/ServerUuid'
+        - $ref: '#/components/parameters/PointOfInterestUuid'
+        - $ref: '#/components/parameters/PointOfInterestAttachmentUuid'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointOfInterestAttachment'
+        '404':
+          description: 'Not Found'
+    delete:
+      tags:
+        - Point of Interest Attachment
+      parameters:
+        - $ref: '#/components/parameters/ClusterUuid'
+        - $ref: '#/components/parameters/ServerUuid'
+        - $ref: '#/components/parameters/PointOfInterestUuid'
+        - $ref: '#/components/parameters/PointOfInterestAttachmentUuid'
+      responses:
+        '204':
+          description: 'No Content'
+        '404':
+          description: 'Not Found'
+components:
+  parameters:
+    ClusterUuid:
+      name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+    ServerUuid:
+      name: serverUuid
+      in: path
+      required: true
+      schema:
+        type: string
+    PointOfInterestUuid:
+      name: pointOfInterestUuid
+      in: path
+      required: true
+      schema:
+        type: string
+    PointOfInterestAttachmentUuid:
+      name: pointOfInterestAttachmentUuid
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    Cluster:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        uuid:
+          type: string
+          example: 2fd9163b-bef0-4f76-90d5-f5f517c71169
+        name:
+          type: string
+          example: NA-PVE-Official
+        type:
+          type: string
+          enum:
+            - PVE
+            - PVP
+    Server:
+      type: object
+      required:
+        - clusterUuid
+        - serverName
+        - mapType
+      properties:
+        uuid:
+          type: string
+          example: 27f68d42-47cc-4e14-97ec-5a367e5fbe92
+        clusterUuid:
+          type: string
+          example: 2fd9163b-bef0-4f76-90d5-f5f517c71169
+        serverName:
+          type: string
+          example: NA-PVE-Official-Extinction730
+        mapType:
+          type: string
+          example: Extinction
+    PointOfInterest:
+      type: object
+      required:
+        - type
+        - allianceStatus
+        - wiped
+        - lat
+        - lng
+      properties:
+        uuid:
+          type: string
+          example: 8fa40a6b-6ecc-4dd2-9325-de0bc05f4500
+        serverUuid:
+          type: string
+          example: 27f68d42-47cc-4e14-97ec-5a367e5fbe92
+        type:
+          type: string
+          example: Point of Interest
+        ownerName:
+          type: string
+        allianceStatus:
+          type: string
+          example: Neutral
+        wiped:
+          type: boolean
+          example: false
+        lat:
+          type: number
+          example: 81.9
+        lng:
+          type: number
+          example: 34.1
+        description:
+          type: string
+    PointOfInterestAttachment:
+      type: object
+      required:
+        - originalFileName
+        - bucketName
+        - objectName
+      properties:
+        uuid:
+          type: string
+          example: afd47560-4919-4837-8ec2-eed9d4aeedf8
+        pointOfInterestUuid:
+          type: string
+          example: 8fa40a6b-6ecc-4dd2-9325-de0bc05f4500
+        originalFileName:
+          type: string
+        bucketName:
+          type: string
+        objectName:
+          type: string
