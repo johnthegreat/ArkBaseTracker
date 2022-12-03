@@ -9,7 +9,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.213.0",
     "cors": "^2.8.5",
-    "debug": "~2.6.9",
+    "debug": "^4.3.4",
     "dotenv": "^10.0.0",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
