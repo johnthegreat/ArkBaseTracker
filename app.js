@@ -15,10 +15,49 @@ const apiPointOfInterestAttachmentController = require('./routes/api/point-of-in
 
 const sequelize = require('./lib/DatabaseProvider');
 (async function() {
-	require('./models/Cluster');
-	require('./models/Server');
-	require('./models/PointOfInterest');
-	require('./models/PointOfInterestAttachment');
+	const Cluster = require('./models/Cluster');
+	const Server = require('./models/Server');
+	const PointOfInterest = require('./models/PointOfInterest');
+	const PointOfInterestAttachment = require('./models/PointOfInterestAttachment');
+
+	// Cluster <-> Server
+
+	Cluster.hasMany(Server, {
+		foreignKey: {
+			name: 'clusterUuid'
+		}
+	});
+	Server.belongsTo(Cluster, {
+		foreignKey: {
+			name: 'clusterUuid'
+		}
+	});
+
+	// Server <-> PointOfInterest
+
+	Server.hasMany(PointOfInterest, {
+		foreignKey: {
+			name: 'serverUuid'
+		}
+	});
+	PointOfInterest.belongsTo(Server, {
+		foreignKey: {
+			name: 'serverUuid'
+		}
+	});
+
+	// PointOfInterest <-> PointOfInterestAttachment
+
+	PointOfInterest.hasMany(PointOfInterestAttachment, {
+		foreignKey: {
+			name: 'pointOfInterestUuid'
+		}
+	});
+	PointOfInterestAttachment.belongsTo(PointOfInterest, {
+		foreignKey: {
+			name: 'pointOfInterestUuid'
+		}
+	});
 
 	try {
 		await sequelize.sync();

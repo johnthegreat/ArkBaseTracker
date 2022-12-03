@@ -2,8 +2,6 @@
 const sequelize = require('../lib/DatabaseProvider');
 const DataTypes = require('sequelize').DataTypes;
 
-const PointOfInterest = require('../models/PointOfInterest');
-
 const PointOfInterestAttachment = sequelize.define('PointOfInterestAttachment', {
 	uuid: {
 		type: DataTypes.STRING,
@@ -12,11 +10,7 @@ const PointOfInterestAttachment = sequelize.define('PointOfInterestAttachment', 
 	},
 	pointOfInterestUuid: {
 		type: DataTypes.UUID,
-		allowNull: false,
-		references: {
-			model: PointOfInterest,
-			key: 'uuid'
-		}
+		allowNull: false
 	},
 	originalFileName: {
 		type: DataTypes.STRING,

@@ -2,8 +2,6 @@
 const sequelize = require('../lib/DatabaseProvider');
 const DataTypes = require('sequelize').DataTypes;
 
-const Server = require('../models/Server');
-
 const PointOfInterest = sequelize.define('PointOfInterest', {
 	uuid: {
 		type: DataTypes.UUID,
@@ -12,11 +10,7 @@ const PointOfInterest = sequelize.define('PointOfInterest', {
 	},
 	serverUuid: {
 		type: DataTypes.STRING,
-		allowNull: false,
-		references: {
-			model: Server,
-			key: 'uuid'
-		}
+		allowNull: false
 	},
 	type: {
 		type: DataTypes.ENUM,

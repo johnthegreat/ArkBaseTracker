@@ -2,8 +2,6 @@
 const sequelize = require('../lib/DatabaseProvider');
 const DataTypes = require('sequelize').DataTypes;
 
-const Cluster = require('../models/Cluster');
-
 const Server = sequelize.define('Server', {
 	uuid: {
 		type: DataTypes.UUID,
@@ -12,11 +10,7 @@ const Server = sequelize.define('Server', {
 	},
 	clusterUuid: {
 		type: DataTypes.UUID,
-		allowNull: false,
-		references: {
-			model: Cluster,
-			key: 'uuid'
-		}
+		allowNull: false
 	},
 	serverName: {
 		type: DataTypes.STRING,
